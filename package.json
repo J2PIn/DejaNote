@@ -1,20 +1,25 @@
 {
+  "name": "dejanote",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "dexie": "^4.x",
-    "dexie-react-hooks": "^1.x",
-    "react": "^18.x",
-    "react-dom": "^18.x",
-    "react-router-dom": "^6.x"
+    "dexie": "^4.0.10",
+    "dexie-react-hooks": "^1.1.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
-    "vite": "^5.x",
-    "typescript": "^5.x",
-    "@types/react": "...",
-    "@types/react-dom": "..."
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2"
   }
 }
