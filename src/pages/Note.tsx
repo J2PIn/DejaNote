@@ -29,7 +29,7 @@ export default function NotePage() {
   // Keep draft synced when switching notes / when history changes due to external factors
   useEffect(() => {
     setDraft(latestText);
-  }, [latestText, id]);
+  }, [latestText, noteId]);
 
   const timerRef = useRef<number | null>(null);
   const lastCommittedRef = useRef<string>("");
