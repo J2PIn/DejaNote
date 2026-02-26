@@ -8,9 +8,13 @@ function formatTime(ts: number) {
 }
 
 export default function NotePage() {
-  const params = useParams();
-  const noteId = params.id;
-  if (!noteId) return <div>Missing note id</div>;
+  const { id } = useParams();
+
+  // guard
+  if (!id) return <div>Missing note id</div>;
+  
+  // make it an actual string for TS (and for Dexie APIs)
+  const noteId: string = id;
 
   const note = useLiveQuery(() => db.notes.get(noteId), [noteId]);
 
