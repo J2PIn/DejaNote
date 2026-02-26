@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "dexie": "^4.x",
+    "dexie-react-hooks": "^1.x",
+    "react": "^18.x",
+    "react-dom": "^18.x",
+    "react-router-dom": "^6.x"
+  },
+  "devDependencies": {
+    "vite": "^5.x",
+    "typescript": "^5.x",
+    "@types/react": "...",
+    "@types/react-dom": "..."
+  }
+}
