@@ -8,14 +8,15 @@ function formatTime(ts: number) {
 }
 
 export default function NotePage() {
-  const { id } = useParams<{ id: string }>();
-  if (!id) return null;
+  const params = useParams();
+  const noteId = params.id;
+  if (!noteId) return <div>Missing note id</div>;
 
-  const note = useLiveQuery(() => db.notes.get(id), [id]);
+  const note = useLiveQuery(() => db.notes.get(noteId), [noteId]);
 
   const events = useLiveQuery(async () => {
-    return db.events.where("noteId").equals(id).sortBy("ts");
-  }, [id]);
+  return db.events.where("noteId").equals(noteId).sortBy("ts");
+  }, [noteId]);
 
   const latestText = useMemo(() => {
     const last = events?.[events.length - 1];
@@ -41,13 +42,13 @@ export default function NotePage() {
     const now = Date.now();
     await db.events.add({
       id: uid("e_"),
-      noteId: id,
+      noteId: noteId,
       ts: now,
       type: "snapshot",
       snapshotText: text,
       chunkId: String(now),
     });
-    await db.notes.update(id, { updatedAt: now });
+    await db.notes.update(noteId, { updatedAt: now });
     setStatus("saved");
     // drop to idle after a moment
     window.setTimeout(() => setStatus("idle"), 800);
@@ -70,7 +71,7 @@ export default function NotePage() {
 
   async function rename(title: string) {
     const t = title.trim() || "Untitled";
-    await db.notes.update(id, { title: t });
+    await db.notes.update(noteId, { title: t });
   }
 
   // Ensure we commit when leaving the page / losing focus
@@ -81,7 +82,7 @@ export default function NotePage() {
     window.addEventListener("blur", onBlur);
     return () => window.removeEventListener("blur", onBlur);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [draft, id]);
+  }, [draft, noteId]);
 
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 360px", gap: 16 }}>
