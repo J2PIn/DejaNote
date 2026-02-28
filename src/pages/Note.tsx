@@ -13,7 +13,7 @@ export default function NotePage() {
   // guard
   if (!id) return <div>Missing note id</div>;
   
-  // make it an actual string for TS (and for Dexie APIs)
+  // make it an actual string for TS (and for Dexie APIs) 
   const noteId: string = id;
 
   const note = useLiveQuery(() => db.notes.get(noteId), [noteId]);
